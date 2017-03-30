@@ -1,0 +1,686 @@
+{
+  "format": "javascript-image-pre1",
+  "arch": "os.osx.x86_64",
+  "load": [
+    {
+      "sourceMap": "packages/underscore.js.map",
+      "path": "packages/underscore.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/meteor/node_modules",
+      "sourceMap": "packages/meteor.js.map",
+      "path": "packages/meteor.js"
+    },
+    {
+      "path": "packages/meteor-base.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/modules-runtime/node_modules",
+      "sourceMap": "packages/modules-runtime.js.map",
+      "path": "packages/modules-runtime.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/modules/node_modules",
+      "sourceMap": "packages/modules.js.map",
+      "path": "packages/modules.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/es5-shim/node_modules",
+      "sourceMap": "packages/es5-shim.js.map",
+      "path": "packages/es5-shim.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/promise/node_modules",
+      "sourceMap": "packages/promise.js.map",
+      "path": "packages/promise.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/ecmascript-runtime/node_modules",
+      "sourceMap": "packages/ecmascript-runtime.js.map",
+      "path": "packages/ecmascript-runtime.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/babel-compiler/node_modules",
+      "sourceMap": "packages/babel-compiler.js.map",
+      "path": "packages/babel-compiler.js"
+    },
+    {
+      "sourceMap": "packages/ecmascript.js.map",
+      "path": "packages/ecmascript.js"
+    },
+    {
+      "path": "packages/stylus.js"
+    },
+    {
+      "path": "packages/standard-minifier-css.js"
+    },
+    {
+      "path": "packages/standard-minifier-js.js"
+    },
+    {
+      "path": "packages/jquery.js"
+    },
+    {
+      "sourceMap": "packages/tracker.js.map",
+      "path": "packages/tracker.js"
+    },
+    {
+      "sourceMap": "packages/base64.js.map",
+      "path": "packages/base64.js"
+    },
+    {
+      "sourceMap": "packages/ejson.js.map",
+      "path": "packages/ejson.js"
+    },
+    {
+      "sourceMap": "packages/check.js.map",
+      "path": "packages/check.js"
+    },
+    {
+      "path": "packages/deps.js"
+    },
+    {
+      "sourceMap": "packages/htmljs.js.map",
+      "path": "packages/htmljs.js"
+    },
+    {
+      "sourceMap": "packages/id-map.js.map",
+      "path": "packages/id-map.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/babel-runtime/node_modules",
+      "sourceMap": "packages/babel-runtime.js.map",
+      "path": "packages/babel-runtime.js"
+    },
+    {
+      "sourceMap": "packages/random.js.map",
+      "path": "packages/random.js"
+    },
+    {
+      "sourceMap": "packages/mongo-id.js.map",
+      "path": "packages/mongo-id.js"
+    },
+    {
+      "sourceMap": "packages/diff-sequence.js.map",
+      "path": "packages/diff-sequence.js"
+    },
+    {
+      "sourceMap": "packages/observe-sequence.js.map",
+      "path": "packages/observe-sequence.js"
+    },
+    {
+      "sourceMap": "packages/reactive-var.js.map",
+      "path": "packages/reactive-var.js"
+    },
+    {
+      "sourceMap": "packages/blaze.js.map",
+      "path": "packages/blaze.js"
+    },
+    {
+      "path": "packages/mquandalle_jade.js"
+    },
+    {
+      "sourceMap": "packages/aldeed_simple-schema.js.map",
+      "path": "packages/aldeed_simple-schema.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/npm-mongo/node_modules",
+      "sourceMap": "packages/npm-mongo.js.map",
+      "path": "packages/npm-mongo.js"
+    },
+    {
+      "sourceMap": "packages/ordered-dict.js.map",
+      "path": "packages/ordered-dict.js"
+    },
+    {
+      "sourceMap": "packages/geojson-utils.js.map",
+      "path": "packages/geojson-utils.js"
+    },
+    {
+      "sourceMap": "packages/minimongo.js.map",
+      "path": "packages/minimongo.js"
+    },
+    {
+      "sourceMap": "packages/retry.js.map",
+      "path": "packages/retry.js"
+    },
+    {
+      "sourceMap": "packages/ddp-common.js.map",
+      "path": "packages/ddp-common.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/ddp-client/node_modules",
+      "sourceMap": "packages/ddp-client.js.map",
+      "path": "packages/ddp-client.js"
+    },
+    {
+      "sourceMap": "packages/rate-limit.js.map",
+      "path": "packages/rate-limit.js"
+    },
+    {
+      "sourceMap": "packages/ddp-rate-limiter.js.map",
+      "path": "packages/ddp-rate-limiter.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/logging/node_modules",
+      "sourceMap": "packages/logging.js.map",
+      "path": "packages/logging.js"
+    },
+    {
+      "sourceMap": "packages/routepolicy.js.map",
+      "path": "packages/routepolicy.js"
+    },
+    {
+      "sourceMap": "packages/html-tools.js.map",
+      "path": "packages/html-tools.js"
+    },
+    {
+      "sourceMap": "packages/blaze-tools.js.map",
+      "path": "packages/blaze-tools.js"
+    },
+    {
+      "sourceMap": "packages/spacebars-compiler.js.map",
+      "path": "packages/spacebars-compiler.js"
+    },
+    {
+      "sourceMap": "packages/spacebars.js.map",
+      "path": "packages/spacebars.js"
+    },
+    {
+      "path": "packages/ui.js"
+    },
+    {
+      "sourceMap": "packages/boilerplate-generator.js.map",
+      "path": "packages/boilerplate-generator.js",
+      "assets": {
+        "boilerplate_web.browser.html": "assets/packages/boilerplate-generator/boilerplate_web.browser.html",
+        "boilerplate_web.cordova.html": "assets/packages/boilerplate-generator/boilerplate_web.cordova.html"
+      }
+    },
+    {
+      "sourceMap": "packages/webapp-hashing.js.map",
+      "path": "packages/webapp-hashing.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/webapp/node_modules",
+      "sourceMap": "packages/webapp.js.map",
+      "path": "packages/webapp.js"
+    },
+    {
+      "path": "packages/audit-argument-checks.js"
+    },
+    {
+      "sourceMap": "packages/callback-hook.js.map",
+      "path": "packages/callback-hook.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/ddp-server/node_modules",
+      "sourceMap": "packages/ddp-server.js.map",
+      "path": "packages/ddp-server.js"
+    },
+    {
+      "path": "packages/ddp.js"
+    },
+    {
+      "sourceMap": "packages/allow-deny.js.map",
+      "path": "packages/allow-deny.js"
+    },
+    {
+      "sourceMap": "packages/binary-heap.js.map",
+      "path": "packages/binary-heap.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/mongo/node_modules",
+      "sourceMap": "packages/mongo.js.map",
+      "path": "packages/mongo.js"
+    },
+    {
+      "sourceMap": "packages/raix_eventemitter.js.map",
+      "path": "packages/raix_eventemitter.js"
+    },
+    {
+      "sourceMap": "packages/aldeed_collection2-core.js.map",
+      "path": "packages/aldeed_collection2-core.js"
+    },
+    {
+      "sourceMap": "packages/aldeed_schema-index.js.map",
+      "path": "packages/aldeed_schema-index.js"
+    },
+    {
+      "sourceMap": "packages/aldeed_schema-deny.js.map",
+      "path": "packages/aldeed_schema-deny.js"
+    },
+    {
+      "path": "packages/aldeed_collection2.js"
+    },
+    {
+      "sourceMap": "packages/cfs_base-package.js.map",
+      "path": "packages/cfs_base-package.js"
+    },
+    {
+      "path": "packages/livedata.js"
+    },
+    {
+      "path": "packages/mongo-livedata.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/cfs_storage-adapter/node_modules",
+      "sourceMap": "packages/cfs_storage-adapter.js.map",
+      "path": "packages/cfs_storage-adapter.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/cfs_gridfs/node_modules",
+      "sourceMap": "packages/cfs_gridfs.js.map",
+      "path": "packages/cfs_gridfs.js"
+    },
+    {
+      "path": "packages/cfs_standard-packages.js"
+    },
+    {
+      "sourceMap": "packages/cottz_publish-relations.js.map",
+      "path": "packages/cottz_publish-relations.js"
+    },
+    {
+      "sourceMap": "packages/dburles_collection-helpers.js.map",
+      "path": "packages/dburles_collection-helpers.js"
+    },
+    {
+      "sourceMap": "packages/idmontie_migrations.js.map",
+      "path": "packages/idmontie_migrations.js"
+    },
+    {
+      "sourceMap": "packages/accounts-base.js.map",
+      "path": "packages/accounts-base.js"
+    },
+    {
+      "sourceMap": "packages/matb33_collection-hooks.js.map",
+      "path": "packages/matb33_collection-hooks.js"
+    },
+    {
+      "path": "packages/reload.js"
+    },
+    {
+      "sourceMap": "packages/autoupdate.js.map",
+      "path": "packages/autoupdate.js"
+    },
+    {
+      "path": "packages/meteor-platform.js"
+    },
+    {
+      "sourceMap": "packages/meteorhacks_collection-utils.js.map",
+      "path": "packages/meteorhacks_collection-utils.js"
+    },
+    {
+      "sourceMap": "packages/meteorhacks_aggregate.js.map",
+      "path": "packages/meteorhacks_aggregate.js"
+    },
+    {
+      "path": "packages/session.js"
+    },
+    {
+      "path": "packages/templating.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/matteodem_easy-search/node_modules",
+      "sourceMap": "packages/matteodem_easy-search.js.map",
+      "path": "packages/matteodem_easy-search.js"
+    },
+    {
+      "sourceMap": "packages/mquandalle_collection-mutations.js.map",
+      "path": "packages/mquandalle_collection-mutations.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/npm-bcrypt/node_modules",
+      "sourceMap": "packages/npm-bcrypt.js.map",
+      "path": "packages/npm-bcrypt.js"
+    },
+    {
+      "sourceMap": "packages/sha.js.map",
+      "path": "packages/sha.js"
+    },
+    {
+      "sourceMap": "packages/srp.js.map",
+      "path": "packages/srp.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/email/node_modules",
+      "sourceMap": "packages/email.js.map",
+      "path": "packages/email.js"
+    },
+    {
+      "sourceMap": "packages/accounts-password.js.map",
+      "path": "packages/accounts-password.js"
+    },
+    {
+      "sourceMap": "packages/kenton_accounts-sandstorm.js.map",
+      "path": "packages/kenton_accounts-sandstorm.js"
+    },
+    {
+      "sourceMap": "packages/service-configuration.js.map",
+      "path": "packages/service-configuration.js"
+    },
+    {
+      "sourceMap": "packages/url.js.map",
+      "path": "packages/url.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/http/node_modules",
+      "sourceMap": "packages/http.js.map",
+      "path": "packages/http.js"
+    },
+    {
+      "sourceMap": "packages/useraccounts_core.js.map",
+      "path": "packages/useraccounts_core.js"
+    },
+    {
+      "sourceMap": "packages/reactive-dict.js.map",
+      "path": "packages/reactive-dict.js"
+    },
+    {
+      "sourceMap": "packages/meteorhacks_inject-data.js.map",
+      "path": "packages/meteorhacks_inject-data.js",
+      "assets": {
+        "lib/inject.html": "assets/packages/meteorhacks_inject-data/lib/inject.html"
+      }
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/meteorhacks_picker/node_modules",
+      "sourceMap": "packages/meteorhacks_picker.js.map",
+      "path": "packages/meteorhacks_picker.js"
+    },
+    {
+      "sourceMap": "packages/meteorhacks_meteorx.js.map",
+      "path": "packages/meteorhacks_meteorx.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/meteorhacks_fast-render/node_modules",
+      "sourceMap": "packages/meteorhacks_fast-render.js.map",
+      "path": "packages/meteorhacks_fast-render.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/kadira_flow-router/node_modules",
+      "sourceMap": "packages/kadira_flow-router.js.map",
+      "path": "packages/kadira_flow-router.js"
+    },
+    {
+      "path": "packages/kadira_blaze-layout.js"
+    },
+    {
+      "path": "packages/coffeescript.js"
+    },
+    {
+      "sourceMap": "packages/softwarerero_accounts-t9n.js.map",
+      "path": "packages/softwarerero_accounts-t9n.js"
+    },
+    {
+      "sourceMap": "packages/useraccounts_flow-routing.js.map",
+      "path": "packages/useraccounts_flow-routing.js"
+    },
+    {
+      "path": "packages/useraccounts_unstyled.js"
+    },
+    {
+      "sourceMap": "packages/3stack_presence.js.map",
+      "path": "packages/3stack_presence.js"
+    },
+    {
+      "path": "packages/alethes_pages.js"
+    },
+    {
+      "sourceMap": "packages/zimme_active-route.js.map",
+      "path": "packages/zimme_active-route.js"
+    },
+    {
+      "sourceMap": "packages/arillo_flow-router-helpers.js.map",
+      "path": "packages/arillo_flow-router-helpers.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/kadira_dochead/node_modules",
+      "sourceMap": "packages/kadira_dochead.js.map",
+      "path": "packages/kadira_dochead.js"
+    },
+    {
+      "sourceMap": "packages/meteorhacks_subs-manager.js.map",
+      "path": "packages/meteorhacks_subs-manager.js"
+    },
+    {
+      "path": "packages/mquandalle_autofocus.js"
+    },
+    {
+      "sourceMap": "packages/mquandalle_moment.js.map",
+      "path": "packages/mquandalle_moment.js",
+      "assets": {
+        "locale/af.js": "assets/packages/mquandalle_moment/locale/af.js",
+        "locale/ar-ma.js": "assets/packages/mquandalle_moment/locale/ar-ma.js",
+        "locale/ar-sa.js": "assets/packages/mquandalle_moment/locale/ar-sa.js",
+        "locale/ar-tn.js": "assets/packages/mquandalle_moment/locale/ar-tn.js",
+        "locale/ar.js": "assets/packages/mquandalle_moment/locale/ar.js",
+        "locale/az.js": "assets/packages/mquandalle_moment/locale/az.js",
+        "locale/be.js": "assets/packages/mquandalle_moment/locale/be.js",
+        "locale/bg.js": "assets/packages/mquandalle_moment/locale/bg.js",
+        "locale/bn.js": "assets/packages/mquandalle_moment/locale/bn.js",
+        "locale/bo.js": "assets/packages/mquandalle_moment/locale/bo.js",
+        "locale/br.js": "assets/packages/mquandalle_moment/locale/br.js",
+        "locale/bs.js": "assets/packages/mquandalle_moment/locale/bs.js",
+        "locale/ca.js": "assets/packages/mquandalle_moment/locale/ca.js",
+        "locale/cs.js": "assets/packages/mquandalle_moment/locale/cs.js",
+        "locale/cv.js": "assets/packages/mquandalle_moment/locale/cv.js",
+        "locale/cy.js": "assets/packages/mquandalle_moment/locale/cy.js",
+        "locale/da.js": "assets/packages/mquandalle_moment/locale/da.js",
+        "locale/de-at.js": "assets/packages/mquandalle_moment/locale/de-at.js",
+        "locale/de.js": "assets/packages/mquandalle_moment/locale/de.js",
+        "locale/el.js": "assets/packages/mquandalle_moment/locale/el.js",
+        "locale/en-au.js": "assets/packages/mquandalle_moment/locale/en-au.js",
+        "locale/en-ca.js": "assets/packages/mquandalle_moment/locale/en-ca.js",
+        "locale/en-gb.js": "assets/packages/mquandalle_moment/locale/en-gb.js",
+        "locale/eo.js": "assets/packages/mquandalle_moment/locale/eo.js",
+        "locale/es.js": "assets/packages/mquandalle_moment/locale/es.js",
+        "locale/et.js": "assets/packages/mquandalle_moment/locale/et.js",
+        "locale/eu.js": "assets/packages/mquandalle_moment/locale/eu.js",
+        "locale/fa.js": "assets/packages/mquandalle_moment/locale/fa.js",
+        "locale/fi.js": "assets/packages/mquandalle_moment/locale/fi.js",
+        "locale/fo.js": "assets/packages/mquandalle_moment/locale/fo.js",
+        "locale/fr-ca.js": "assets/packages/mquandalle_moment/locale/fr-ca.js",
+        "locale/fr.js": "assets/packages/mquandalle_moment/locale/fr.js",
+        "locale/fy.js": "assets/packages/mquandalle_moment/locale/fy.js",
+        "locale/gl.js": "assets/packages/mquandalle_moment/locale/gl.js",
+        "locale/he.js": "assets/packages/mquandalle_moment/locale/he.js",
+        "locale/hi.js": "assets/packages/mquandalle_moment/locale/hi.js",
+        "locale/hr.js": "assets/packages/mquandalle_moment/locale/hr.js",
+        "locale/hu.js": "assets/packages/mquandalle_moment/locale/hu.js",
+        "locale/hy-am.js": "assets/packages/mquandalle_moment/locale/hy-am.js",
+        "locale/id.js": "assets/packages/mquandalle_moment/locale/id.js",
+        "locale/is.js": "assets/packages/mquandalle_moment/locale/is.js",
+        "locale/it.js": "assets/packages/mquandalle_moment/locale/it.js",
+        "locale/ja.js": "assets/packages/mquandalle_moment/locale/ja.js",
+        "locale/ka.js": "assets/packages/mquandalle_moment/locale/ka.js",
+        "locale/km.js": "assets/packages/mquandalle_moment/locale/km.js",
+        "locale/ko.js": "assets/packages/mquandalle_moment/locale/ko.js",
+        "locale/lb.js": "assets/packages/mquandalle_moment/locale/lb.js",
+        "locale/lt.js": "assets/packages/mquandalle_moment/locale/lt.js",
+        "locale/lv.js": "assets/packages/mquandalle_moment/locale/lv.js",
+        "locale/mk.js": "assets/packages/mquandalle_moment/locale/mk.js",
+        "locale/ml.js": "assets/packages/mquandalle_moment/locale/ml.js",
+        "locale/mr.js": "assets/packages/mquandalle_moment/locale/mr.js",
+        "locale/ms-my.js": "assets/packages/mquandalle_moment/locale/ms-my.js",
+        "locale/my.js": "assets/packages/mquandalle_moment/locale/my.js",
+        "locale/nb.js": "assets/packages/mquandalle_moment/locale/nb.js",
+        "locale/ne.js": "assets/packages/mquandalle_moment/locale/ne.js",
+        "locale/nl.js": "assets/packages/mquandalle_moment/locale/nl.js",
+        "locale/nn.js": "assets/packages/mquandalle_moment/locale/nn.js",
+        "locale/pl.js": "assets/packages/mquandalle_moment/locale/pl.js",
+        "locale/pt-br.js": "assets/packages/mquandalle_moment/locale/pt-br.js",
+        "locale/pt.js": "assets/packages/mquandalle_moment/locale/pt.js",
+        "locale/ro.js": "assets/packages/mquandalle_moment/locale/ro.js",
+        "locale/ru.js": "assets/packages/mquandalle_moment/locale/ru.js",
+        "locale/sk.js": "assets/packages/mquandalle_moment/locale/sk.js",
+        "locale/sl.js": "assets/packages/mquandalle_moment/locale/sl.js",
+        "locale/sq.js": "assets/packages/mquandalle_moment/locale/sq.js",
+        "locale/sr-cyrl.js": "assets/packages/mquandalle_moment/locale/sr-cyrl.js",
+        "locale/sr.js": "assets/packages/mquandalle_moment/locale/sr.js",
+        "locale/sv.js": "assets/packages/mquandalle_moment/locale/sv.js",
+        "locale/ta.js": "assets/packages/mquandalle_moment/locale/ta.js",
+        "locale/th.js": "assets/packages/mquandalle_moment/locale/th.js",
+        "locale/tl-ph.js": "assets/packages/mquandalle_moment/locale/tl-ph.js",
+        "locale/tr.js": "assets/packages/mquandalle_moment/locale/tr.js",
+        "locale/tzm-latn.js": "assets/packages/mquandalle_moment/locale/tzm-latn.js",
+        "locale/tzm.js": "assets/packages/mquandalle_moment/locale/tzm.js",
+        "locale/uk.js": "assets/packages/mquandalle_moment/locale/uk.js",
+        "locale/uz.js": "assets/packages/mquandalle_moment/locale/uz.js",
+        "locale/vi.js": "assets/packages/mquandalle_moment/locale/vi.js",
+        "locale/zh-cn.js": "assets/packages/mquandalle_moment/locale/zh-cn.js",
+        "locale/zh-tw.js": "assets/packages/mquandalle_moment/locale/zh-tw.js"
+      }
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/ongoworks_speakingurl/node_modules",
+      "sourceMap": "packages/ongoworks_speakingurl.js.map",
+      "path": "packages/ongoworks_speakingurl.js"
+    },
+    {
+      "sourceMap": "packages/raix_handlebar-helpers.js.map",
+      "path": "packages/raix_handlebar-helpers.js"
+    },
+    {
+      "sourceMap": "packages/meteorspark_util.js.map",
+      "path": "packages/meteorspark_util.js"
+    },
+    {
+      "sourceMap": "packages/cfs_http-methods.js.map",
+      "path": "packages/cfs_http-methods.js"
+    },
+    {
+      "sourceMap": "packages/tap_i18n.js.map",
+      "path": "packages/tap_i18n.js"
+    },
+    {
+      "path": "packages/fortawesome_fontawesome.js"
+    },
+    {
+      "path": "packages/mousetrap_mousetrap.js"
+    },
+    {
+      "path": "packages/mquandalle_jquery-textcomplete.js"
+    },
+    {
+      "path": "packages/mquandalle_jquery-ui-drag-drop-sort.js"
+    },
+    {
+      "path": "packages/mquandalle_mousetrap-bindglobal.js"
+    },
+    {
+      "path": "packages/mquandalle_perfect-scrollbar.js"
+    },
+    {
+      "sourceMap": "packages/peerlibrary_assert.js.map",
+      "path": "packages/peerlibrary_assert.js"
+    },
+    {
+      "sourceMap": "packages/peerlibrary_reactive-field.js.map",
+      "path": "packages/peerlibrary_reactive-field.js"
+    },
+    {
+      "sourceMap": "packages/peerlibrary_computed-field.js.map",
+      "path": "packages/peerlibrary_computed-field.js"
+    },
+    {
+      "sourceMap": "packages/peerlibrary_base-component.js.map",
+      "path": "packages/peerlibrary_base-component.js"
+    },
+    {
+      "sourceMap": "packages/peerlibrary_blaze-components.js.map",
+      "path": "packages/peerlibrary_blaze-components.js"
+    },
+    {
+      "sourceMap": "packages/perak_markdown.js.map",
+      "path": "packages/perak_markdown.js"
+    },
+    {
+      "path": "packages/seriousm_emoji-continued.js"
+    },
+    {
+      "path": "packages/templates_tabs.js"
+    },
+    {
+      "path": "packages/verron_autosize.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/simple_json-routes/node_modules",
+      "sourceMap": "packages/simple_json-routes.js.map",
+      "path": "packages/simple_json-routes.js"
+    },
+    {
+      "path": "packages/naxio_flash.js"
+    },
+    {
+      "path": "packages/rajit_bootstrap3-datepicker.js"
+    },
+    {
+      "path": "packages/hot-code-push.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/cfs_data-man/node_modules",
+      "sourceMap": "packages/cfs_data-man.js.map",
+      "path": "packages/cfs_data-man.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/cfs_file/node_modules",
+      "sourceMap": "packages/cfs_file.js.map",
+      "path": "packages/cfs_file.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/cfs_tempstore/node_modules",
+      "sourceMap": "packages/cfs_tempstore.js.map",
+      "path": "packages/cfs_tempstore.js"
+    },
+    {
+      "sourceMap": "packages/cfs_http-publish.js.map",
+      "path": "packages/cfs_http-publish.js"
+    },
+    {
+      "sourceMap": "packages/cfs_access-point.js.map",
+      "path": "packages/cfs_access-point.js"
+    },
+    {
+      "sourceMap": "packages/cfs_reactive-property.js.map",
+      "path": "packages/cfs_reactive-property.js"
+    },
+    {
+      "sourceMap": "packages/cfs_reactive-list.js.map",
+      "path": "packages/cfs_reactive-list.js"
+    },
+    {
+      "sourceMap": "packages/cfs_power-queue.js.map",
+      "path": "packages/cfs_power-queue.js"
+    },
+    {
+      "sourceMap": "packages/cfs_upload-http.js.map",
+      "path": "packages/cfs_upload-http.js"
+    },
+    {
+      "sourceMap": "packages/cfs_collection.js.map",
+      "path": "packages/cfs_collection.js"
+    },
+    {
+      "sourceMap": "packages/cfs_collection-filters.js.map",
+      "path": "packages/cfs_collection-filters.js"
+    },
+    {
+      "sourceMap": "packages/cfs_worker.js.map",
+      "path": "packages/cfs_worker.js"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "path": "packages/global-imports.js"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/app.js.map",
+      "path": "app/app.js"
+    },
+    {
+      "sourceMap": "packages/mdg_validation-error.js.map",
+      "path": "packages/mdg_validation-error.js"
+    }
+  ]
+}

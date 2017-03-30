@@ -1,0 +1,196 @@
+@import 'nib'
+
+.list
+  box-sizing: border-box
+  display: flex
+  flex-direction: column
+  flex: 0 0 270px
+  position: relative
+  // Even if this background color is the same as the body we can't leave it
+  // transparent, because that won't work during a list drag.
+  background: darken(white, 13%)
+  height: 100%
+  border-left: 1px solid darken(white, 20%)
+  padding: 0
+  float: left
+
+  &:first-child
+    margin-left: 5px
+    border-left: none
+
+  .card-details + &
+    border-left: none
+
+  &.ui-sortable-helper
+    box-shadow: -2px 2px 8px rgba(0, 0, 0, .3),
+                0 0 1px rgba(0, 0, 0, .5)
+    transform: rotate(4deg)
+    cursor: grabbing
+
+    .list-header.ui-sortable-handle
+      cursor: grabbing
+
+  &.placeholder
+    background-color: rgba(0, 0, 0, .2)
+    border-color: transparent
+    box-shadow: none
+    height: 100px
+
+  &.list-composer, & .list-composer
+    .open-list-composer
+      color: #8c8c8c
+
+    .list-name-input
+      background: white
+      margin: -3px 0 8px
+
+.list-header
+  flex: 0 0 auto
+  margin: 20px 12px 4px
+  position: relative
+  min-height: 20px
+
+  &.ui-sortable-handle
+    cursor: grab
+
+  .list-header-name
+    display: inline
+    font-size: 16px
+    line-height: 17px
+    margin: 0
+    font-weight: bold
+    min-height: 9px
+    min-width: 30px
+    overflow: hidden
+    text-overflow: ellipsis
+    word-wrap: break-word
+    cursor: pointer
+    margin-left: 5px
+
+  .list-header-watch-icon
+    padding-left: 10px
+    color: #a6a6a6
+
+  .list-header-menu-icon
+    position: absolute
+    padding: 7px
+    margin-top: 1px
+    top: -@padding
+    right: -@padding
+
+  .list-header-container
+    width: 190px
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+
+  .list-header-label-type
+    width: 10px
+    height: 10px
+    float: left
+    margin: 3px 2px 0 0
+    border-radius: 3px
+
+  .isRepeating
+    position: absolute;
+    left: 205px;
+    top: 2px;
+    opacity: 0.5;
+
+.list-body
+  flex: 1
+  display: flex
+  overflow-y: auto
+  padding: 5px 11px
+
+  .minicards
+    flex: 1
+
+    form
+      margin-bottom: 9px
+
+  .ps-scrollbar-y-rail
+    transform: translateX(2px)
+
+  .open-minicard-composer
+    border-radius: 2px
+    color: #8c8c8c
+    display: block
+    padding: 7px 10px
+    position: relative
+    text-decoration: none
+    animation: fadeIn 0.3s
+
+    i.fa
+      margin-right: 1px
+      color: #4d4d4d
+      font-size: 10px
+
+    &:hover
+      background: #fafafa
+      color: #222
+      box-shadow: 0 1px 2px rgba(0,0,0,.2)
+
+.modalPop
+  border: 1px solid rgba(169,169,169,0.37)
+  background: white
+  padding: 15px
+
+.color-scheduled
+  background-color: #FF9F19
+
+.color-unscheduled
+  background-color: #3CB500
+
+.color-common,.color-default
+  background-color: white
+
+.label-scheduled,.label-unscheduled,.label-common,.label-default
+  width: 100px
+  border-radius: 6px
+  text-align: center
+  padding: 5px 0
+  margin-top: 5px
+  border: 1px solid black
+  display: inline-block
+
+.event-label,.event-member
+  font-size: 20px
+  margin-left: 10px 
+  cursor: pointer
+
+  &:first-child
+    margin: 0 10px
+
+  .add-event-label,.add-event-member
+    display: none 
+
+.event-label-box.add-event-label:last-child
+  display: initial
+
+.event-member-box.add-event-member:last-child
+  display: initial
+
+.event-member-box.add-event-member:last-child
+  display: initial
+
+.update-event-label-box, .add-event-label-box, .update-event-member-box, .add-event-member-box
+  margin-top: 15px;
+  text-align: center;
+
+  label
+    height: 25px
+    float: left
+    margin-left: 10px
+
+table.no-border
+  border: none
+
+  tr
+    border: none
+
+    td
+      border: none
+
+.show
+  display: initial

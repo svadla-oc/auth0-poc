@@ -1,0 +1,262 @@
+template(name="cardDetails")
+  section.card-details.js-card-details
+    .card-details-header(class=currentBoard.colorClass)
+      +inlinedForm(classNames="js-card-details-title")
+        +editCardTitleForm
+      else
+      
+        a.fa.fa-times-thin.close-card-details.js-close-card-details
+        if currentUser.isBoardMember
+          a.fa.fa-navicon.card-details-menu.js-open-card-details-menu
+        h2.card-details-title.js-card-title(
+          class="{{#if isMemberAndArchive currentUser.isBoardMember currentCard.archived}}js-open-inlined-form is-editable{{else}}is-disabled{{/if}}")
+            = title
+            if isWatching
+              i.fa.fa-eye.card-details-watch
+
+    
+
+    div.card-details-body.js-perfect-scrollbar: .card-details-canvas
+      if archived
+        p.warning(style="text-align: center;") {{_ 'card-archived'}}
+      table.no-border(style="width: 100%; margin-top: 15px;")
+        tr
+          td(style="width: 50%;")
+            button(class="{{#if isMemberAndArchive currentUser.isBoardMember currentCard.archived}}js-design-form-btn{{else}}disabled{{/if}}" style="width: 100%; border-radius: 0; padding: 15px; margin-top: 0px;") {{_ 'design'}}
+          td(style="width: 50%;")
+            button(class="{{#if previewUrl}}js-preview-form-btn{{else}}disabled{{/if}}" style="width: 100%; border-radius: 0; padding: 15px; margin-top: 0px;") {{_ 'preview'}}
+      form(id="uploadForm")
+        input.hide.js-design-form-input(type="file" multiple)
+
+      //- XXX We should use "editable" to avoid repetiting ourselves
+      if currentUser.isBoardMember
+        h3.card-details-item-title {{_ 'description'}}
+        +inlinedCardDescription(classNames="card-description js-card-description")
+          +editor(autofocus=true)
+            | {{getUnsavedValue 'cardDescription' _id description}}
+          .edit-controls.clearfix
+            button.primary(type="submit") {{_ 'save'}}
+            a.fa.fa-times-thin.js-close-inlined-form
+        else
+          a(class="{{#if isMemberAndArchive currentUser.isBoardMember currentCard.archived}}js-open-inlined-form{{else}}is-disabled{{/if}}")
+            if description
+              = description
+            else
+              | {{_ 'edit'}}
+          if (hasUnsavedValue 'cardDescription' _id)
+            p.quiet
+              | {{_ 'unsaved-description'}}
+              a.js-open-inlined-form {{_ 'view-it'}}
+              = ' - '
+              a.js-close-inlined-form {{_ 'discard'}}
+      else if description
+        h3.card-details-item-title {{_ 'description'}}
+        = description
+      
+      div(style="margin-top: 30px;; width: 100%")
+        div(style="width: 50%; float: left;")
+          h3.card-details-item-title {{_ 'version'}}
+            div(style="margin-top: 10px;")
+              .js-process.hide
+                img(src='/icon-loading.gif' style='width: 100px; height: 100px;')
+              .js-ready
+                each version in this.versions
+                  unless version.archived
+                    if equals version.id this.selected_form_version_id
+                      if isMemberAndArchive currentUser.isBoardMember currentCard.archived
+                        input(type='radio' name='_version' value='{{version.id}}' style='display: inline; margin-right: 10px;' checked title="{{_ 'card-version-radio-title'}}")
+                      else
+                        input(type='radio' name='_version' value='{{version.id}}' style='display: inline; margin-right: 10px;' checked title="{{_ 'card-version-radio-title'}}" disabled)
+                    else
+                      if isMemberAndArchive currentUser.isBoardMember currentCard.archived
+                        input(type='radio' name='_version' value='{{version.id}}' style='display: inline; margin-right: 10px;' title="{{_ 'card-version-radio-title'}}")
+                      else
+                        input(type='radio' name='_version' value='{{version.id}}' style='display: inline; margin-right: 10px;' title="{{_ 'card-version-radio-title'}}" disabled) 
+                    span(style="font-weight: normal")
+                      | {{version.name}}
+                    a.fa.fa-navicon.js-card-version-action.js-card-version-2nd-action(id='version-{{version.id}}' style="margin-left: 10px;")
+                    br
+                unless this.archived
+                  a.member.add-member.card-details-item-add-button.js-design-form-btn(title="{{_ 'add-version'}}")
+                    i.fa.fa-plus
+
+        div(style="width: 50%; float: right;")
+          h3.card-details-item-title {{_ 'configuration-parameters'}}
+          table.no-border(style="width: 100%;")
+            tr
+              td
+                a.fa.fa-check-square(class="{{#if isMemberAndArchive currentUser.isBoardMember currentCard.archived}}js-edit-card-hidden{{else}}is-disabled{{/if}} {{#unless hidden}}hide{{/unless}}" id="hidden-true")
+                a.fa.fa-square-o(class="{{#if isMemberAndArchive currentUser.isBoardMember currentCard.archived}}js-edit-card-hidden{{else}}is-disabled{{/if}} {{#if hidden}}hide{{/if}}" id="hidden-false")
+                span
+                  | {{_ 'hidden'}}
+            tr
+              td
+                a.fa.fa-check-square(class="{{#if isMemberAndArchive currentUser.isBoardMember currentCard.archived}}js-edit-card-required{{else}}is-disabled{{/if}} {{#unless required}}hide{{/unless}}" id="required-true")
+                a.fa.fa-square-o(class="{{#if isMemberAndArchive currentUser.isBoardMember currentCard.archived}}js-edit-card-required{{else}}is-disabled{{/if}} {{#if required}}hide{{/if}}" id="required-false")
+                span
+                  | {{_ 'required'}}
+            tr
+              td 
+                a.fa.fa-check-square(class="{{#if isMemberAndArchive currentUser.isBoardMember currentCard.archived}}js-edit-card-participate{{else}}is-disabled{{/if}} {{#unless participate}}hide{{/unless}}" id="participate-true")
+                a.fa.fa-square-o(class="{{#if isMemberAndArchive currentUser.isBoardMember currentCard.archived}}js-edit-card-participate{{else}}is-disabled{{/if}} {{#if participate}}hide{{/if}}" id="participate-false")
+                span
+                  | {{_ 'participant'}}
+            tr
+              td
+                table.no-border.js-edit-card-participate-detail(style="margin-left: 15px;")
+                  tr
+                    td
+                      if participate
+                        a.fa.fa-check-square(class="{{#if isMemberAndArchive currentUser.isBoardMember currentCard.archived}}js-edit-card-anonymous{{else}}is-disabled{{/if}} {{#unless anonymous}}hide{{/unless}}" id="anonymous-true")
+                        a.fa.fa-square-o(class="{{#if isMemberAndArchive currentUser.isBoardMember currentCard.archived}}js-edit-card-anonymous{{else}}is-disabled{{/if}} {{#if anonymous}}hide{{/if}}" id="anonymous-false")
+                        span(style="margin-left: 3px;")
+                          | {{_ 'anonymous'}}
+                        if participate
+                          if anonymous
+                            div.js-edit-card-anony-url-div(style="margin: 10px 0 0 10px;")
+                              label(style="font-size: 10px;")
+                                | {{clientUrl}}/
+                                +inlinedForm(classNames="js-card-details-subUri")
+                                  +editCardSubmissionUriForm
+                                else
+                                  a(class="{{#if isMemberAndArchive currentUser.isBoardMember currentCard.archived}}js-open-inlined-form is-editable{{else}}is-disabled{{/if}}")
+                                    if submissionUri
+                                      = submissionUri
+                                    else
+                                      | {{_ 'edit'}}
+                  tr
+                    td(style="padding-left: 30px;")
+                      if participate
+                        if anonymous
+                          a.fa.fa-check-square(class="{{#if isMemberAndArchive currentUser.isBoardMember currentCard.archived}}js-edit-card-offline{{else}}is-disabled{{/if}} {{#unless offline}}hide{{/unless}}" id="offline-true")
+                          a.fa.fa-square-o(class="{{#if isMemberAndArchive currentUser.isBoardMember currentCard.archived}}js-edit-card-offline{{else}}is-disabled{{/if}} {{#if offline}}hide{{/if}}" id="offline-false")
+                          span(style="margin-left: 3px;")
+                            | {{_ 'offline'}}
+
+      .card-details-items(style="width: inherit")
+        .card-details-item.card-details-item-members
+          h3.card-details-item-title {{_ 'members'}}
+          each members
+            +userAvatarCard(userId=this cardId=../_id)
+            | {{! XXX Hack to hide syntaxic coloration /// }}
+          if isMemberAndArchive currentUser.isBoardMember currentCard.archived
+            a.member.add-member.card-details-item-add-button.js-add-members(title="{{_ 'card-members-title'}}")
+              i.fa.fa-plus
+
+        .card-details-item.card-details-item-labels
+          h3.card-details-item-title {{_ 'labels'}}
+          a(class="{{#if isMemberAndArchive currentUser.isBoardMember currentCard.archived}}js-add-labels{{else}}is-disabled{{/if}}" title="{{_ 'card-labels-title'}}")
+            each labels
+              span.card-label(class="card-label-{{color}}" title=name)= name
+          if isMemberAndArchive currentUser.isBoardMember currentCard.archived
+            a.card-label.add-label.js-add-labels(title="{{_ 'card-labels-title'}}")
+              i.fa.fa-plus
+
+        if startAt
+          .card-details-item.card-details-item-start
+            h3.card-details-item-title {{_ 'card-start'}}
+            +cardStartDate
+
+        if dueAt
+          .card-details-item.card-details-item-due
+            h3.card-details-item-title {{_ 'card-due'}}
+            +cardDueDate
+
+      hr
+      +checklists(cardId = _id)
+
+      //if attachments.count
+        hr
+        h2
+          i.fa.fa-paperclip
+          | {{_ 'attachments'}}
+
+        +attachmentsGalery
+
+      hr
+      h2 {{ _ 'activity'}}
+      if currentUser.isBoardMember
+        +commentForm
+      if isLoaded.get
+        +activities(card=this mode="card")
+
+template(name="editCardSubmissionUriForm")
+  input.js-edit-card-subUri(type="text" style="width: 84px; min-height: 0px; height: 20px; margin-bottom: 10px;" value="{{submissionUri}}")
+  .edit-controls.clearfix
+    button.primary.js-submit-edit-card-subUri(type="submit") {{_ 'save'}}
+    a.fa.fa-times-thin.js-close-inlined-form
+
+template(name="editCardTitleForm")
+  textarea.js-edit-card-title(rows='1' autofocus)
+    = title
+  .edit-controls.clearfix
+    button.primary.confirm.js-submit-edit-card-title-form(type="submit") {{_ 'save'}}
+    a.fa.fa-times-thin.js-close-inlined-form
+
+template(name="cardDetailsActionsPopup")
+  ul.pop-over-list
+    if currentCard.archived
+      li: a.js-restore-card {{_ 'restore'}}
+    else
+      //li: a.js-start-date {{_ 'editCardStartDatePopup-title'}}
+      //li: a.js-due-date {{_ 'editCardDueDatePopup-title'}}
+      li: a.js-copy-card-to {{_ 'copy-to'}}
+      li: a.js-move-card {{_ 'move'}}
+      li: a.js-archive-card {{_ 'archive'}}
+
+template(name="moveCardPopup")
+  +boardLists
+
+template(name="copyToEventPopup")
+  +boardLists
+
+template(name="cardMembersPopup")
+  ul.pop-over-list.js-card-member-list
+    each board.activeMembers
+      li.item(class="{{#if isCardMember}}active{{/if}}")
+        a.name.js-select-member(href="#")
+          +userAvatar(userId=user._id)
+          span.full-name
+            = user.profile.fullname
+            | (<span class="username">{{ user.username }}</span>)
+          if isCardMember
+            i.fa.fa-check
+
+template(name="cardMorePopup")
+  p.quiet
+    span.clearfix
+      span {{_ 'link-card'}}
+      = ' '
+      i.fa.colorful(class="{{#if board.isPublic}}fa-globe{{else}}fa-lock{{/if}}")
+      input.inline-input(type="text" readonly value="{{ rootUrl }}")
+    | {{_ 'added'}}
+    span.date(title=card.createdAt) {{ moment createdAt 'LLL' }}
+    a.js-delete(title="{{_ 'card-delete-notice'}}") {{_ 'delete'}}
+
+template(name="cardArchivePopup")
+  p {{_ "card-delete-archive" currentList.title}}
+  button.js-confirm.negate.full(type="submit") {{_ 'archive'}}
+
+template(name="cardDeletePopup")
+  p {{_ "card-delete-pop"}}
+  button.js-confirm.negate.full(type="submit") {{_ 'remove'}}
+
+template(name="cardDetailsVersionPopup")
+  ul.pop-over-list
+    li: a.js-preview-version {{_ 'preview'}}
+    li: a.js-download-version {{_ 'download'}}
+    unless currentCard.archived
+      if equals activeCard.selected_form_version_id currentCardVersion.id
+        li: a.js-archive-version.hide {{_ 'archive'}}
+      else
+        li: a.js-archive-version {{_ 'archive'}}
+
+template(name="versionDeletePopup")
+  p {{_ "version-delete-pop" currentCard.title}}
+  button.js-confirm.negate.full(type="submit") {{_ 'archive'}}
+
+template(name="cardDetailsAvailableVersionPopup")
+  ul.pop-over-list
+    each type
+      li: a(href='{{href}}')
+        | {{name}}

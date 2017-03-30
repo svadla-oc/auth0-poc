@@ -1,0 +1,30 @@
+
+template(name="userAvatarCard")
+  a.member(class="{{#if isMemberAndArchive currentUser.isBoardMember currentCard.archived}}js-member{{else}}is-disabled{{/if}}" title="{{userData.profile.fullname}} ({{userData.username}})")
+    if userData.profile.avatarUrl
+      img.avatar.avatar-image(src=userData.profile.avatarUrl)
+    else
+      +userAvatarInitialsList(userId=userData._id)
+
+    if showStatus
+      span.member-presence-status(class=presenceStatusClassName)
+      span.member-type(class=memberType)
+
+template(name="userAvatarInitialsCard")
+  svg.avatar.avatar-initials(viewBox="0 0 {{viewPortWidth}} 15")
+    text(x="50%" y="13" text-anchor="middle")= initials
+
+template(name="cardDetailMemberPopup")
+  .board-member-menu
+    .mini-profile-info
+      +userAvatar(userId=user._id showEdit=true)
+      .info
+        h3= user.profile.fullname
+        p.quiet @{{ user.username }}
+    if currentUser.isBoardMember
+      ul.pop-over-list
+        li: a.js-remove-member {{_ 'remove-member-from-card'}}
+
+        if $eq currentUser._id user._id
+          with currentUser
+            li: a.js-edit-profile {{_ 'edit-profile'}}
