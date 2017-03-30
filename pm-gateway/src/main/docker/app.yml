@@ -1,0 +1,31 @@
+#-------------------------------------------------------------------------------
+# Note for using the rate-limiting:
+#   The comment part won't be copied if you use the subgenerator docker-compose
+#   you have to manually copy it
+#-------------------------------------------------------------------------------
+version: '2'
+services:
+    pmgateway-app:
+        image: pmgateway
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://pmgateway-postgresql:5432/pmGateway
+            - SPRING_DATA_CASSANDRA_CONTACTPOINTS=pmgateway-cassandra
+            - JHIPSTER_SLEEP=30 # gives time for the Cassandra cluster to start and execute the migration scripts
+        ports:
+            - 8080:8080
+    pmgateway-postgresql:
+        extends:
+            file: postgresql.yml
+            service: pmgateway-postgresql
+    # Uncomment to have Cassandra working with the gateway
+    # pmgateway-cassandra:
+    #     extends:
+    #         file: cassandra-cluster.yml
+    #         service: pmgateway-cassandra
+    # pmgateway-cassandra-migration:
+    #     extends:
+    #         file: cassandra-migration.yml
+    #         service: pmgateway-cassandra-migration
+    #     environment:
+    #         - CREATE_KEYSPACE_SCRIPT=create-keyspace-prod.cql
