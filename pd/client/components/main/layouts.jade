@@ -1,0 +1,59 @@
+head
+  title
+  meta(name="viewport"
+   content="maximum-scale=1.0,width=device-width,initial-scale=1.0,user-scalable=0")
+  //- XXX We should use pathFor in the following `href` to support the case
+    where the application is deployed with a path prefix, but it seems to be
+    difficult to do that cleanly with Blaze -- at least without adding extra
+    packages.
+  //link(rel="shortcut icon" href="/wekan-favicon.png")
+  script(type="text/javascript" src="http://cdn.auth0.com/js/lock/10.13.0/lock.min.js")
+  script(type="text/javascript" src="http://cdn.auth0.com/js/auth0/8.4.0/auth0.min.js")
+  script(type="text/javascript" src="http://rawgit.com/auth0/jwt-decode/master/build/jwt-decode.js")
+
+template(name="userFormsLayout")
+  section.auth-layout
+    h1.at-form-landing-logo
+      //img(src="{{pathFor '/wekan-logo.png'}}" alt="Wekan")
+    section.auth-dialog
+      +Template.dynamic(template=content)
+      div.at-form-lang
+        select.select-lang.js-userform-set-language
+          each languages
+            if isCurrentLanguage
+              option(value="{{tag}}" selected="selected") {{name}}
+            else
+              option(value="{{tag}}") {{name}}
+
+template(name="defaultLayout")
+  +header
+  #content
+    +Template.dynamic(template=content)
+  if (Modal.isOpen)
+    #modal
+      .overlay
+      .modal-content
+        a.modal-close-btn.js-close-modal
+          i.fa.fa-times-thin
+        +Template.dynamic(template=Modal.getHeaderName)
+        +Template.dynamic(template=Modal.getTemplateName)
+
+template(name="notFound")
+  +message(label='page-not-found')
+
+template(name="message")
+  .big-message.quiet(class=color)
+    h1 {{_ label}}
+    unless currentUser
+      with(pathFor route='atSignIn')
+        p {{{_ 'page-maybe-private' this}}}
+
+template(name="blanksLayout")
+  #content
+    +Template.dynamic(template=content)
+
+template(name="blanksContent")
+  img.loading-img(src="/please-wait.gif" style="display: block; margin: 10% auto;")
+
+template(name="loadingCallback")
+  img.loading-img(src="/please-wait.gif")

@@ -1,0 +1,45 @@
+template(name="listBody")
+  .list-body.js-perfect-scrollbar
+    .minicards.clearfix.js-minicards
+      if cards.count
+        +inlinedForm(autoclose=false position="top")
+          +addCardForm(listId=_id position="top")
+      each cards
+        a.minicard-wrapper.js-minicard(href=absoluteUrl
+          class="{{#if cardIsSelected}}is-selected{{/if}}"
+          class="{{#if MultiSelection.isSelected _id}}is-checked{{/if}}" style="display: flex;")
+          if MultiSelection.isActive
+            .materialCheckBox.multi-selection-checkbox.js-toggle-multi-selection(
+              class="{{#if MultiSelection.isSelected _id}}is-checked{{/if}}")
+          +minicard(this)
+      if currentUser.isBoardMember
+        .ready(class="js-ready-{{_id}}")
+          +inlinedForm(autoclose=false position="bottom")
+            +addCardForm(listId=_id position="bottom")
+          else
+            a.open-minicard-composer.js-card-composer.js-open-inlined-form.add-btn
+              i.fa.fa-plus
+              | {{_ 'add-card'}}
+        .process(class="js-process-{{_id}} hide")
+          +spinner
+
+template(name="addCardForm")
+  if getLabels
+    .minicard.minicard-composer.js-composer
+      .minicard-labels
+        each getLabels
+          .minicard-label(class="card-label-{{color}}" title="{{name}}")
+  if members.get
+    .minicard.minicard-composer.js-composer
+      .minicard-members.js-minicard-composer-members
+        each members.get
+          +userAvatar(userId=this)
+  input.full-line.js-card-title(autofocus placeholder="{{_ 'card-example'}}" style="background: #fff; width: 100%;")
+
+  .add-controls.clearfix
+    button.confirm(type="submit" disabled) {{_ 'add'}}
+    a.fa.fa-times-thin.js-close-inlined-form
+
+template(name="autocompleteLabelLine")
+  .minicard-label(class="card-label-{{colorName}}" title=labelName)
+  span(class="{{#if hasNoName}}quiet{{/if}}")= labelName

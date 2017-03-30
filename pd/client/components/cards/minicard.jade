@@ -1,0 +1,60 @@
+template(name="minicard") 
+  .minicard
+    if cover
+      .minicard-cover(style="background-image: url('{{pathFor cover.url}}');")
+    if labels
+      .minicard-labels
+        each labels
+          .minicard-label(class="card-label-{{color}}" title="{{name}}")
+
+    .minicard-title
+      if listId
+        if archived
+          | {{_ title}}
+        else
+          =title
+      else
+        =title
+
+    .dates
+      if startAt
+          .date
+            +minicardStartDate
+      if dueAt
+          .date
+            +minicardDueDate
+
+    if members
+      .minicard-members.js-minicard-members
+        each members
+          +userAvatar(userId=this)
+
+
+    .badges
+      if checklists.count
+        .badge(class="{{#if checklistFinished}}is-finished{{/if}}")
+          span.badge-icon.fa.fa-check-square-o
+          span.badge-text.check-list-text {{checklistFinishedCount}}/{{checklistItemCount}}
+      if hidden
+        .badge.badge-icon.fa.fa-eye-slash(title="Hidden Form")
+      if required
+        .badge.badge-icon.fa.fa-key(title="Required Form")
+      if participate
+        .badge.badge-icon.fa.fa-user(title="Participate Form")
+        if anonymous
+          .badge.badge-icon.fa.fa-user-times(title="Anonymous Form")
+          if offline
+            .badge.badge-icon.fa.fa-chain-broken(title="Offline Form")
+      if isRepeating
+        .badge.badge-icon.fa.fa-refresh.isRepeating(title="Repeating Event")
+    //  if comments.count
+        .badge(title="{{_ 'card-comments-title' comments.count }}")
+          span.badge-icon.fa.fa-comment-o.badge-comment
+          span.badge-text= comments.count
+    //  if description
+        .badge.badge-state-image-only(title=description)
+          span.badge-icon.fa.fa-align-left
+    //  if attachments.count
+        .badge
+          span.badge-icon.fa.fa-paperclip
+          span.badge-text= attachments.count

@@ -1,0 +1,504 @@
+template(name="activities")
+  .activities.js-sidebar-activities
+    //- We should use Template.dynamic here but there is a bug with
+    //- blaze-components: https://github.com/peerlibrary/meteor-blaze-components/issues/30
+    if $eq mode "board"
+      +boardActivities
+    else if $eq mode "card"
+      +cardActivities
+    else 
+      +listActivities
+
+template(name="boardActivities")
+  each currentBoard.activities
+    .activity
+      +userAvatar(userId=user._id)
+      p.activity-desc
+        +memberName(user=user)
+
+        if($eq activityType 'addAttachment')
+          | {{{_ 'activity-attached' attachmentLink cardLink}}}.
+
+        if($eq activityType 'addBoardMember')
+          | {{{_ 'activity-added' memberLink boardLabel}}}.
+
+        if($eq activityType 'addComment')
+          if (cardLink)
+            | {{{_ 'activity-comment' cardLink}}}
+            a.activity-comment(href="{{ card.absoluteUrl }}")
+              +viewer
+                = comment.text
+          else
+            | {{{_ 'activity-comment' listLink}}}
+            a.activity-comment(href="{{ list.absoluteUrl }}")
+              +viewer
+                = comment.text
+
+        if($eq activityType 'addChecklist')
+          | {{{_ 'activity-checklist-added' cardLink}}}.
+          .activity-checklist(href="{{ card.absoluteUrl }}")
+            +viewer
+              = checklist.title
+
+        if($eq activityType 'archivedCard')
+          | {{{_ 'activity-archived-card-on-board' cardLink listLink}}}.
+
+        if($eq activityType 'archivedList')
+          | {{{_ 'activity-archived-list-on-board' listLink boardLabel}}}.
+
+        if($eq activityType 'createBoard')
+          | {{_ 'activity-created' boardLabel}}.
+
+        if($eq activityType 'copyBoard')
+          | {{_ 'activity-copy-board' boardLabel oldBoard.title}}.
+
+        if($eq activityType 'createCard')
+          | {{{_ 'activity-added-card-on-board' cardLink listLink}}}.
+
+        if($eq activityType 'copyCardOriginal')
+          | {{{_ 'activity-copy-card-original-on-board' cardLink listLink newListLink}}}.
+
+        if($eq activityType 'createList')
+          | {{{_ 'activity-added-list-on-board' listLink boardLabel}}}.
+
+        if($eq activityType 'copyList')
+          | {{_ 'activity-copy-list' listLabel oldList.title oldBoard.title}}.
+
+        if($eq activityType 'removeList')
+          | {{_ 'activity-removed' title boardLabel}}.
+
+        if($eq activityType 'importBoard')
+          | {{{_ 'activity-imported-board' boardLabel sourceLink}}}.
+
+        if($eq activityType 'importCard')
+          | {{{_ 'activity-imported' cardLink boardLabel sourceLink}}}.
+
+        if($eq activityType 'importList')
+          | {{{_ 'activity-imported' listLabel boardLabel sourceLink}}}.
+
+        if($eq activityType 'joinMember')
+          if(cardLink)
+            if($eq user._id member._id)
+              | {{{_ 'activity-joined' cardLink}}}.
+            else
+              | {{{_ 'activity-added' memberLink cardLink}}}.
+          else
+            if($eq user._id member._id)
+              | {{{_ 'activity-joined' listLink}}}.
+            else
+              | {{{_ 'activity-added' memberLink listLink}}}.
+
+        if($eq activityType 'moveCard')
+          | {{{_ 'activity-moved' cardLink oldListLink listLink}}}.
+
+        if($eq activityType 'removeBoardMember')
+          | {{{_ 'activity-excluded' memberLink boardLabel}}}.
+
+        if($eq activityType 'restoredCard')
+          | {{{_ 'activity-sent-card-on-board' cardLink listLink}}}.
+
+        if($eq activityType 'restoredList')
+          | {{{_ 'activity-sent-list-on-board' listLink boardLabel}}}.
+
+        if($eq activityType 'addVersionCard')
+          | {{{_ 'activity-add-version-card-on-list' versionName cardLink}}}.
+
+        if($eq activityType 'updateVersionCard')
+          | {{{_ 'activity-update-version-card-on-list' cardLink}}}.
+
+        if($eq activityType 'archiveVersionCard')
+          | {{{_ 'activity-archived-version-card-on-list' versionName cardLink}}}.
+
+        if($eq activityType 'restoreVersionCard')
+          | {{{_ 'activity-restored-version-card-on-list' versionName cardLink}}}.
+
+        if($eq activityType 'updateDefaultVersion')
+          | {{{_ 'activity-update-default-version-on-list' versionName cardLink listLink}}}.
+
+        if($eq activityType 'unjoinMember')
+          if(cardLink)
+            if($eq user._id member._id)
+              | {{{_ 'activity-unjoined' cardLink}}}.
+            else
+              | {{{_ 'activity-removed' memberLink cardLink}}}.
+          else
+            if($eq user._id member._id)
+              | {{{_ 'activity-unjoined' listLink}}}.
+            else
+              | {{{_ 'activity-removed' memberLink listLink}}}.
+
+        if($eq activityType 'renameCard')
+          | {{{_ 'activity-rename-card-on-list' oldCardTitle cardLink}}}.
+
+        if($eq activityType 'updateDescriptionCard')
+          | {{{_ 'activity-update-description-card-on-board' cardLink oldCardDescription descriptionCardLink}}}.
+
+        if($eq activityType 'updateCardProperties')
+          | {{{_ 'activity-update-card-properties-on-board' cardLink listLink}}}.
+
+        if($eq activityType 'updateOrderCard')
+          | {{{_ 'activity-update-order-card-on-board' cardLink sort listLink}}}.
+
+        if($eq activityType 'renameList')
+          | {{{_ 'activity-rename-list-on-board' oldListTitle listLink}}}.
+
+        if($eq activityType 'updateDescriptionList')
+          | {{{_ 'activity-update-description-list-on-board' listLink oldListDescription descriptionListLink}}}.
+
+        if($eq activityType 'updateRepeating')
+          | {{{_ 'activity-update-repeating-on-board' listLink}}}.
+
+        if($eq activityType 'updateOrderList')
+          | {{{_ 'activity-update-order-list-on-board' listLink sort boardLabel}}}.
+
+        if($eq activityType 'copyListOriginal')
+          | {{{_ 'activity-copy-list-on-board' listLink newListLink}}}.
+
+        span(title=createdAt).activity-meta {{ moment createdAt }}
+
+template(name="cardActivities")
+  each currentCard.activities
+    .activity
+      if($eq activityType 'createCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-added-card' cardLabel listLink}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'addVersionCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{_ 'activity-add-version-card' versionName cardLabel}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'updateVersionCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{_ 'activity-update-version-card' cardLabel}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'archiveVersionCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{_ 'activity-archived-version-card' versionName cardLabel}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'restoreVersionCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{_ 'activity-restored-version-card' versionName cardLabel}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'updateDefaultVersion')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-update-default-version' versionName cardLabel listLink}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'renameCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{_ 'activity-rename-card' cardLabel}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'updateDescriptionCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{_ 'activity-update-description' cardLabel}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'updateCardProperties')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{_ 'activity-update-card-properties' cardLabel}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'copyCardClone')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-copy-card-clone' cardLabel oldListLink}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'copyCardOriginal')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-copy-card-original' cardLabel newListLink}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'archivedCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-archived-card' cardLabel listLink}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'restoredCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-sent-card' cardLink listLink}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'updateOrderCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-update-order-card' cardLabel sort listLink}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'addComment')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          +inlinedForm(classNames='js-edit-comment')
+            +editor(autofocus=true)
+              = comment.text
+            .edit-controls
+              button.primary(type="submit") {{_ 'edit'}}
+          else
+            .activity-comment
+              +viewer
+                = comment.text
+            span(title=createdAt).activity-meta {{ moment createdAt }}
+              if ($eq currentUser._id comment.userId)
+                = ' - '
+                a.js-open-inlined-form {{_ "edit"}}
+                = ' - '
+                a.js-delete-comment {{_ "delete"}}
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'moveCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{_ 'activity-moved' cardLabel oldList.title list.title}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'addAttachment')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-attached' attachmentLink cardLabel}}}.
+          if attachment.isImage
+            img.attachment-image-preview(src=attachment.url)
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'addChecklist')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-checklist-added' cardLabel}}}.
+          .activity-checklist
+            +viewer
+              = checklist.title
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+template(name="listActivities")
+  each currentList.activities
+    .activity
+      if($eq activityType 'createList')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-added' listLabel boardLabel}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'createCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-added-card-on-list' cardLink listLabel}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'renameCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-rename-card-on-list' oldCardTitle cardLink}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'updateDescriptionCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-update-description-card-on-board' cardLink oldCardDescription descriptionCardLink}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'updateCardProperties')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-update-card-properties-on-list' cardLink}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'importList')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-imported' listLabel boardLabel sourceLink}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'archivedCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-archived-card-on-list' cardLink listLabel}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'archivedList')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-archived' listLabel boardLabel}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'restoredCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-sent-card-on-list' cardLink listLabel}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'updateOrderCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-update-order-card-on-list' cardLink sort listLabel}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'copyListClone')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-copy-list-clone' listLabel oldListLink}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'copyListOriginal')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-copy-list-original' listLabel newListLink}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'copyCardClone')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-copy-card-clone-on-list' cardLink oldListLink}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'copyCardOriginal')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-copy-card-original-on-list' cardLink newListLink}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'moveList')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{_ 'activity-moved' listLabel oldBoard.title board.title}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'moveCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-moved' cardLink oldListLink listLabel}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'renameList')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-rename-list' listLabel listLink}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'updateDescriptionList')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{_ 'activity-update-description' listLabel}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'updateRepeating')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{_ 'activity-update-repeating' listLabel}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'updateOrderList')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-update-order-list' listLabel sort boardLabel}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'addVersionCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-add-version-card-on-list' versionName cardLink}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'updateVersionCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-update-version-card' cardLink}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'archiveVersionCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-archived-version-card-on-list' versionName cardLink}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'restoreVersionCard')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-restored-version-card-on-list' versionName cardLink}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'updateDefaultVersion')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          | {{{_ 'activity-update-default-version-on-list' versionName cardLink listLink}}}.
+          span(title=createdAt).activity-meta {{ moment createdAt }}
+
+      if($eq activityType 'addComment')
+        +userAvatar(userId=user._id)
+        p.activity-desc
+          +memberName(user=user)
+          +inlinedForm(classNames='js-edit-comment')
+            +editor(autofocus=true)
+              = comment.text
+            .edit-controls
+              button.primary(type="submit") {{_ 'edit'}}
+          else
+            .activity-comment
+              +viewer
+                = comment.text
+            span(title=createdAt).activity-meta {{ moment createdAt }}
+              if ($eq currentUser._id comment.userId)
+                = ' - '
+                a.js-open-inlined-form {{_ "edit"}}
+                = ' - '
+                a.js-delete-comment {{_ "delete"}}
+          span(title=createdAt).activity-meta {{ moment createdAt }}
