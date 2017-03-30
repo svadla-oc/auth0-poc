@@ -4,7 +4,6 @@ import { Router, ActivatedRouteSnapshot, NavigationEnd, RoutesRecognized, Naviga
 import { Title } from '@angular/platform-browser';
 import { LocalStorageService } from 'ng2-webstorage';
 import { StateStorageService, AuthServerProvider } from '../../shared';
-import { APP_DOMAIN, APP_PORT } from '../../app.constants';
 
 @Component({
     selector: 'jhi-main',
@@ -12,7 +11,7 @@ import { APP_DOMAIN, APP_PORT } from '../../app.constants';
 })
 export class JhiMainComponent implements OnInit {
 
-    redirectUri = 'http://' +  APP_DOMAIN + ':' + APP_PORT + '/';
+    redirectUri = 'http://' + window.location.host + '/';
 
     constructor(
         private titleService: Title,
