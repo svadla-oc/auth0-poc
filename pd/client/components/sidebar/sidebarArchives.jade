@@ -1,0 +1,51 @@
+template(name="archivesSidebar")
+  +basicTabs(tabs=tabs)
+
+   +tabContent(slug="cards")
+    each archivedCardsAndVersions
+      .archive-item-container 
+        a.minicard-wrapper.js-minicard(href=this.form.absoluteUrl)
+          +minicard(this.form)
+        if this.form.archived
+          if currentUser.isBoardMember
+            button.js-restore-card
+              i.fa.fa-undo
+     
+      each versi in this.archived_versions
+        +miniversion(formId=this.form.form_id version=versi name=this.form.title)
+
+    else
+      | {{_'no-archived-cards'}}
+
+   +tabContent(slug="lists")
+    each archivedListsAndCards
+      .archive-item-container 
+        a.minicard-wrapper.js-minicard(href=this.list.absoluteUrl)
+          +minicard(this.list)
+        if this.list.archived  
+          if currentUser.isBoardMember
+            button.js-restore-list
+              i.fa.fa-undo
+       
+      each this.archived_cards
+        .archive-item-container 
+          a.minicard-wrapper.js-minicard(href=absoluteUrl)
+            p(style="visibility: hidden;") {{_ '&th'}}
+            +minicard(this)
+          if currentUser.isBoardMember
+            button.js-restore-card
+              i.fa.fa-undo 
+    else
+      | {{_'no-archived-lists'}}
+
+
+template(name="miniversion") 
+  .archive-item-container 
+    a.minicard-wrapper.js-minicard(href=version.previewURL target="_blank")
+      p(style="visibility: hidden;") {{_ '&th'}}
+      .minicard.miniversion
+        .minicard-title
+          | {{_ 'versionz'}}{{_ 'z'}}{{_ 'space'}}{{_ version.name}}
+    if currentUser.isBoardMember
+      button.js-restore-version
+        i.fa.fa-undo

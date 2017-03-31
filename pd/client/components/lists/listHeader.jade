@@ -1,0 +1,56 @@
+template(name="listHeader")
+  .list-header.js-list-header
+    .list-header-container
+      each labels
+        .list-header-label-type(class="card-label-{{color}}", title="{{name}}")
+      h2.list-header-name
+        a(href=absoluteUrl)
+          = title
+          if showCardsCountForList cards.count
+            = cards.count
+            span.lowercase
+              |  {{_ 'cards'}}
+      //if currentUser.isBoardMember
+        if isWatching
+          i.list-header-watch-icon.fa.fa-eye
+    if (isRepeating)
+      i.fa.fa-refresh.isRepeating(title="Repeating Event")
+    a.list-header-menu-icon.fa.fa-navicon.js-open-list-menu
+
+template(name="editListTitleForm")
+  .list-composer
+    input.list-name-input.full-line(type="text" value=title autofocus)
+    .edit-controls.clearfix
+      button.primary.confirm(type="submit") {{_ 'save'}}
+      a.fa.fa-times-thin.js-close-inlined-form
+
+template(name="listActionPopup")
+  ul.pop-over-list
+    if (currentList.archived)
+      li: a.js-restore-event {{_ 'restore'}}
+    else
+      if cards.count
+        li: a.js-select-cards {{_ 'list-select-cards'}}
+      li: a.js-copy-event {{_ 'copy'}}
+      li: a.js-remove-event {{_ 'archive'}}
+
+template(name="boardLists")
+  ul.pop-over-list
+    each currentBoard.lists
+      li
+        if (currentCard)
+          unless ($eq currentCard.listId _id)
+            a.js-select-list= title
+        else  
+          if ($eq ../_id _id)
+            a.disabled {{title}} ({{_ 'current'}})
+          else
+            a.js-select-list= title
+
+template(name="archiveEventPopup")
+  p {{_ 'archive-event'}}
+  button.js-confirm.negate.full(type="submit") {{_ 'archive'}}
+
+template(name="removeEventPopup")
+  p {{_ 'remove-event'}}
+  button.js-confirm.negate.full(type="submit") {{_ 'remove'}}
