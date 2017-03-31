@@ -4,6 +4,7 @@ import { Router, ActivatedRouteSnapshot, NavigationEnd, RoutesRecognized, Naviga
 import { Title } from '@angular/platform-browser';
 import { LocalStorageService } from 'ng2-webstorage';
 import { StateStorageService, AuthServerProvider } from '../../shared';
+import { LOGIN_APP_HOST } from '../../app.constants';
 
 @Component({
     selector: 'jhi-main',
@@ -69,6 +70,9 @@ export class JhiMainComponent implements OnInit {
                                 scope: 'openid name picture',
                                 prompt: 'none'
                             });
+                        } else {
+                            let subdomain = window.location.hostname.split('.')[0];
+                            window.location.href = 'http://' + subdomain + '.' + LOGIN_APP_HOST + '/auth?redirect_uri=' + this.redirectUri;
                         }
                     });
                 }
