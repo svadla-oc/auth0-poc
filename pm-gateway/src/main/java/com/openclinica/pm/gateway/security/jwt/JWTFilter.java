@@ -5,6 +5,8 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.openclinica.pm.gateway.security.UserContext;
+import com.openclinica.pm.gateway.security.UserContextHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -35,6 +37,9 @@ public class JWTFilter extends GenericFilterBean {
             HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
             String jwt = resolveToken(httpServletRequest);
             if (StringUtils.hasText(jwt)) {
+                UserContext userContext = this.tokenProvider.getUserContext(jwt);
+                UserContextHolder.setUserContext(userContext);
+                // Keeping this code here so spring security checks still work. This should be removed if/when we decide to stop using spring security
                 Authentication authentication = this.tokenProvider.getAuthentication(jwt);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }

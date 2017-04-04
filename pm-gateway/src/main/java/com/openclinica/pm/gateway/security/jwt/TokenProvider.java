@@ -6,6 +6,10 @@ import com.auth0.jwt.pem.X509CertUtils;
 import com.auth0.spring.security.auth0.Auth0JWTToken;
 import com.auth0.spring.security.auth0.Auth0TokenException;
 import com.auth0.spring.security.auth0.Auth0UserDetails;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.openclinica.pm.gateway.security.UserContext;
+import com.openclinica.pm.gateway.security.UserContextHolder;
 import io.github.jhipster.config.JHipsterProperties;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -49,7 +53,7 @@ public class TokenProvider {
 
     private static final String PUBLIC_KEY_PATH = "oc4.cer";
 
-    private static final String CLIENT_ID = "1eoEgcEjrUMzCIZ1h7keDnt8w9gga6DA";
+    private static final String USER_CONTEXT_CLAIM_NAME = "https://www.openclinica.com/userContext";
 
     public TokenProvider(JHipsterProperties jHipsterProperties) {
         this.jHipsterProperties = jHipsterProperties;
@@ -108,6 +112,34 @@ public class TokenProvider {
             .signWith(SignatureAlgorithm.HS512, secretKey)
             .setExpiration(validity)
             .compact();
+    }
+
+    public UserContext getUserContext(String token) {
+        try {
+            final Map<String, Object> decoded = jwtVerifier.verify(token);
+            Map userContextMap = (Map) decoded.get(USER_CONTEXT_CLAIM_NAME);
+            if (userContextMap != null) {
+                ObjectMapper objectMapper = new ObjectMapper();
+                JsonNode userContextJson = new ObjectMapper().valueToTree(userContextMap);
+                UserContext userContext = objectMapper.treeToValue(userContextJson, UserContext.class);
+                return userContext;
+            }
+
+            return null;
+        } catch (InvalidKeyException e) {
+            throw new Auth0TokenException("InvalidKeyException thrown while decoding JWT token " + e.getLocalizedMessage());
+        } catch (NoSuchAlgorithmException e) {
+            throw new Auth0TokenException("NoSuchAlgorithmException thrown while decoding JWT token " + e.getLocalizedMessage());
+        } catch (IllegalStateException e) {
+            throw new Auth0TokenException("IllegalStateException thrown while decoding JWT token " + e.getLocalizedMessage());
+        } catch (SignatureException e) {
+            throw new Auth0TokenException("SignatureException thrown while decoding JWT token " + e.getLocalizedMessage());
+        } catch (IOException e) {
+            throw new Auth0TokenException("IOException thrown while decoding JWT token " + e.getLocalizedMessage());
+        } catch (JWTVerifyException e) {
+            throw new Auth0TokenException("JWTVerifyException thrown while decoding JWT token " + e.getLocalizedMessage());
+        }
+
     }
 
     public Authentication getAuthentication(String token) {
